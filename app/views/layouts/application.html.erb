@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BloodApp</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div class="container-narrow">
+  <div class="masthead">
+    <%= render 'layouts/user_header' %>
+    <h2 class="muted"><%= link_to "Mera Bharat Red Cross", root_path %></h2>
+    <h5 class="muted">Donate Blood, Save Life!</h5>
+  </div>
+  <hr />
+  <%= yield %>
+</div>
+  </body>
+</html>
