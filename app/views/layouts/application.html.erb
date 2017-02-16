@@ -27,6 +27,9 @@
   <%= yield %>
   </div>
   <% if user_signed_in? %>
+  <div>
+  <li><%= link_to "Register Now", registers_path, :class => "btn btn-success"%></li>
+</div>
   <div class="row text-center">
    
     <p>

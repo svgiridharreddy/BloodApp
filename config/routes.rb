@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :registers
+  get 'registers/index'
+  root :to => "registers#index"
   devise_for :users
   get 'static_pages/home'
   root :to => "static_pages#home"
