@@ -12,6 +12,7 @@
   
   </script>
   <body>
+    
     <div class="container-narrow">
   <div class="masthead">
     <%= render 'layouts/user_header' %>
@@ -22,8 +23,10 @@
   </div>
   <br/>
   <hr/>
+  <div class="col-md-2 col-md-offset-5">
   <%= yield %>
-
+  </div>
+  <% if user_signed_in? %>
   <div class="row text-center">
    
     <p>
@@ -42,6 +45,6 @@
 
   </div>
 
-
+<% end %>
  </body>
 </html>
