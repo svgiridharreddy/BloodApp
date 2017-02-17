@@ -1,6 +1,6 @@
 <ul class="nav nav-pills pull-right">
   <% if user_signed_in? %>
-  <li><%= link_to "Register Now",  new_register_path, :method => :Register, :class => "btn btn-success"%>
+  <li><%= link_to "Register Now",  new_register_path, :class => "btn btn-success"%>
   </li>
     <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete, :class => 'btn btn-large btn-danger'%></li>
   <% else %>
