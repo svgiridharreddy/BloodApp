@@ -28,6 +28,7 @@
     <%= yield %>
   </div>
   <% if user_signed_in? %>
+  <%= render partial: 'layouts/search'%>
     <div class="row text-center">
       <p>
         <center>

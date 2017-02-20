@@ -12,22 +12,6 @@
 
 ActiveRecord::Schema.define(version: 20170218131748) do
 
-  create_table "registers", force: :cascade do |t|
-    t.string   "Name"
-    t.string   "Bloodgroup"
-    t.string   "Phone"
-    t.text     "Address"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "tasks", force: :cascade do |t|
-    t.string   "name"
-    t.boolean  "completed"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
