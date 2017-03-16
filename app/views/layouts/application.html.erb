@@ -28,7 +28,14 @@
     <%= yield %>
   </div>
   <% if user_signed_in? %>
-  <%= render partial: 'layouts/search'%>
+  <div class="btn-group btn-group-justified">
+    <%= link_to "Donate Blood", root_path, :id=>"open-contacts-dialog-btn", :class=> "btn btn-warning btn-lg" %>
+    <%= link_to "Need Blood", root_path, :id=>"open-contacts-dialog-btn", :class=> "btn btn-warning btn-lg" %>
+  </div>
+
+  <%= render partial: 'static_pages/show'%>
+    <% !@users.nil? && @users.each do |user| %>
+      <%end%>
     <div class="row text-center">
       <p>
         <center>
