@@ -1,1 +1,10 @@
+ <div class="col-md-12 col-md-offset-0">
+ <% if user_signed_in? %>
+  <div class="btn-group btn-group-justified">
+    <%= link_to "Donate Blood", new_project_path, :id=>"open-contacts-dialog-btn", :class=> "btn btn-warning btn-lg" %>
+    <%= link_to "Need Blood", projects_path, :id=>"open-contacts-dialog-btn", :class=> "btn btn-warning btn-lg" %>
+  </div>
+  <% end %>
+ <%= render partial: 'layouts/content'%>
+</div>
 
