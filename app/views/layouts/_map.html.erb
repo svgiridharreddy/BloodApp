@@ -1,80 +1,57 @@
-<script src='https://maps.googleapis.com/maps/api/js?key=&sensor=false&extension=.js'></script> 
-<script> 
-    google.maps.event.addDomListener(window, 'load', init);
-    var map;
-    function init() {
-        var mapOptions = {
-            center: new google.maps.LatLng(16.544893, 81.521240),
-            zoom: 2,
-            zoomControl: true,
-            zoomControlOptions: {
-                style: google.maps.ZoomControlStyle.DEFAULT,
-            },
-            disableDoubleClickZoom: false,
-            mapTypeControl: true,
-            mapTypeControlOptions: {
-                style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-            },
-            
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
-            styles: [
+<style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+      #map-canvas { height: 100% }
+  </style>
+  <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVdlyqpDfn1sXmYcY9WJS4cfU0jnkIWao&sensor=false">
+  </script>
+  <script type="text/javascript">
+    function set_map(state, city){
+      var mapOptions = {
+        center: new google.maps.LatLng(25.687944,-100.309403),
+        zoom: 8,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      var map = new google.maps.Map(document.getElementById("map-canvas"),
+      mapOptions);
 
-],
+      if(state == ""){
+        address = city;
+      }else{
+        address = state + ',' + city;
+      }
+
+      var geocoder = new google.maps.Geocoder();
+
+      geocoder.geocode({
+        'address':address
+      },
+
+      function(result, status){
+        if (status == google.maps.GeocoderStatus.OK){
+          map.setCenter(result[0].geometry.location);
+
+          var marker = new google.maps.Marker({
+            map: map,
+            position: result[0].geometry.location
+          });
+        }else{
+          alert("Geocode was not successful for the following reason: " + status);
         }
-        var mapElement = document.getElementById('map-canvas');
-        var map = new google.maps.Map(mapElement, mapOptions);
-        var locations = [
-['ASIAN', 'Hubert Fournier<br />116, Middle Road, ICB Enterprise House,<br />#08-03/04, 188972 Singapore', 'Phone: (65) 63339833', 'italia@optimconsulting.net', 'undefined', 1.2992375,  103.7835042, 'https://mapbuildr.com/assets/img/markers/solid-pin-blue.png'],['ASIAN','#18, 2/3, Dr Rajkumar Road, 59a, 4n Block, Rajaji Nagar, Rajaji Nagar, Dr Rajkumar Rd, Udayam Nagar, Rajaji Nagar, Bengaluru, Karnataka 560010, India', 12.9716, 77.5946, 'https://mapbuildr.com/assets/img/markers/solid-pin-blue.png']
-        ];
-        
+      });
+      return false;
+    }
 
- function bindInfoWindow(marker, map, title, desc, telephone, email, web, link) {
-      var infoWindowVisible = (function () {
-              var currentlyVisible = false;
-              return function (visible) {
-                  if (visible !== undefined) {
-                      currentlyVisible = visible;
-                  }
-                  return currentlyVisible;
-               };
-           }());
-           iw = new google.maps.InfoWindow();
-           google.maps.event.addListener(marker, 'click', function() {
-               if (infoWindowVisible()) {
-                   iw.close();
-                   infoWindowVisible(false);
-               } else {
-                   var html= "<div style='color:#000;background-color:#fff;padding:5px;width:150px;'><h4>"+title+"</h4><p>"+desc+"<p><p>"+telephone+"<p><a href='mailto:"+email+"' >"+email+"<a></div>";
-                   iw = new google.maps.InfoWindow({content:html});
-                   iw.open(map,marker);
-                   infoWindowVisible(true);
-               }
-        });
-        google.maps.event.addListener(iw, 'closeclick', function () {
-            infoWindowVisible(false);
-        });
- }
-}
-</script>
-<style>
-    #map-canvas {
-        height: 600px;
-        width: 1140px;
-        border: 3px solid red;
-        display: block;
-        margin: auto;
-    }
-    .gm-style-iw * {
-        display: block;
-        width: 100%;
-    }
-    .gm-style-iw h4, .gm-style-iw p {
-        margin: auto;
-        padding: 0;
-    }
-    .gm-style-iw a {
-        color: #4272db;
-    }
-</style>
-    <div id="map-canvas"/>
+    $(document).ready(function(){
+      set_map('<%= @user.state %>', '<%= @user.city %>');
+    })
+  </script>
+    
 
+  <label>Name : </label>&nbsp;<%= @user.name %>
+  <br />
+  <label>Location :</label>
+  <br />
+  <br />
+  <div id="map-canvas" style="width:300px;height:200px"/>
