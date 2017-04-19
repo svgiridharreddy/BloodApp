@@ -41,6 +41,8 @@ gem 'omniauth-twitter'
 gem 'omniauth-linkedin'
 gem 'omniauth-github'
 gem 'geocoder'
+gem 'bootstrap-social-rails'
+gem 'font-awesome-rails'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password

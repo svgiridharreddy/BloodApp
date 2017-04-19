@@ -12,17 +12,11 @@
 
   </script>
   <body>
-
-  
-    <%= render partial: 'layouts/new_boot' %>
-    <%= render partial: 'layouts/image_slider' %>
-    
-  <br/>
-  <hr/>
-  <%= render partial: 'layouts/messages' %>
+    <%= render partial: 'layouts/user_header' %>
+   
+    <%= render partial: 'layouts/messages' %>
   <div>
-
-    <%= yield %>
+    <%= yield %>  
   </div>
  </body>
 </html>
