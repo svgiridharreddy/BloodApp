@@ -17,3 +17,6 @@
 //= require underscore
 //= require gmaps/google
 //= require_tree .
+$(document).ready(function() {
+  $('#myBtn').on('click', function() { $('#myForm').submit(); });
+});

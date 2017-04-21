@@ -1,25 +1,26 @@
 class UsersController < ApplicationController
-
-  # GET/PATCH /users/:id/finish_signup
-  def finish_signup
-
-    if request.patch? && params[:user] #&& params[:user][:email]
-      if current_user.update(user_params)
-#Add a comment to this line
-        current_user.skip_reconfirmation!
-        sign_in(current_user, bypass: true)
-        redirect_to root_path, notice: 'Your profile was successfully updated.'
+  # POST /users
+  # POST /users.json
+  def create
+    @user = User.new(params[:user])
+ 
+    respond_to do |format|
+      if @user.save
+        # Tell the UserMailer to send a welcome email after save
+        UserMailer.welcome_email(@user).deliver_now
+  
+        format.html { redirect_to(@user, notice: 'User was successfully created.') }
+        format.json { render json: @user, status: :created, location: @user }
       else
-        @show_errors = true
+        format.html { render action: 'new' }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  private
-
-  def user_params
-    accessible = [ :name, :email ] # extend with your own params
-    accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
-    params.require(:user).permit(accessible)
+  def send_order_mail(user)
+    @user = user
+    @url  = 'http://localhost:3000/users/sign_in'
+    mail to: user.email, subject: 'Welcome to My Awesome Site'
   end
 end

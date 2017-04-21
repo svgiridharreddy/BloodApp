@@ -8,6 +8,7 @@ class ProjectsController < ApplicationController
       @users = User.all
     end
   end
+  
 end
 
 

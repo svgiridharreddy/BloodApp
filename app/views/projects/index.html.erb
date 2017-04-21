@@ -12,16 +12,20 @@
   <tr class="danger">                          
     <th>Name</th>
     <th>Blood-group</th>
-    <th>Phone</th>
+    <th>Email</th>
     <th>Address</th>
+    <th>Send-Email<th>
   </tr>
 </thead>
 <% @users.each do |u|%>
   <tr class="info">
   <td><%= u.name %></td>
   <td><%= u.blood_group %></td>
-  <td><%= u.phone %></td>
+  <td><%= u.email %></td>
   <td><%= u.address %></td>
+  <td><%= link_to "Send", :controller => "users", :action => "send_order_mail" %>
+</td>
   </tr>
 <% end %>
 </table>
+
