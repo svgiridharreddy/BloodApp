@@ -28,14 +28,4 @@ class User < ApplicationRecord
   def self.search(search)
     where("blood_group LIKE ?", "%#{search}%")
   end
-
-  after_create :welcome_email, :send_order_mail
-
-  def welcome_email
-    UserMailer.welcome_email(self).deliver_now
-  end
-  
-  def send_order_mail
-    UsersController.send_order_mail(user).deliver_now
-  end
 end
